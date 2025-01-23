@@ -19,6 +19,6 @@ A Chrome extension that adds a "Watch Later" button beside each YouTube video. U
 ## Installation
 1. Clone this repository:
    ```bash
-   git clone https://github.com/yourusername/YouTube-Watch-Later-Extension.git
+   git clone https://github.com/yourusername/LaterTube.git
 
 
