@@ -7,7 +7,7 @@ const addSaveButtonToTitle = () => {
     if (titleContainer && !titleContainer.querySelector(".save-btn")) {
         console.log("Title container found. Adding Save button...");
         const saveBtn = document.createElement("button");
-        saveBtn.innerText = "Save";
+        saveBtn.innerText = "Watch Later";
         saveBtn.classList.add("save-btn");
         saveBtn.style.cssText =
             "margin-left: 10px; cursor: pointer; font-weight: bolder; border-radius: 18px; background: rgba(255, 255, 255, 0.1); border: none; padding: 5px 15px; color: white;";
@@ -41,8 +41,7 @@ const addSaveButtonToTitle = () => {
                         alert("This video is already saved.");
                         return;
                     }
-
-                    savedVideos.push({ title, url, thumbnail });
+                    savedVideos.push({ title, url, thumbnail, tag : "" });
                     chrome.storage.local.set({ savedVideos }, () => {
                         if (chrome.runtime.lastError) {
                             console.error("Error saving video:", chrome.runtime.lastError);
@@ -56,8 +55,6 @@ const addSaveButtonToTitle = () => {
                 console.error("Error in Save button logic:", error);
             }
         });
-    } else if (!titleContainer) {
-        console.warn("Title container not found. Retrying...");
     }
 };
 
