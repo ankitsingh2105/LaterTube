@@ -1,5 +1,4 @@
-##LaterTube
-# YouTube Watch Later Chrome Extension - 
+# LaterTube 
 
 A Chrome extension that adds a "Watch Later" button beside each YouTube video. Users can save videos by clicking the button, and view the saved videos within the extension.
 
