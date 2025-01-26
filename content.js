@@ -1,31 +1,40 @@
-console.log("YouTube Video Saver is running...");
-
 const addSaveButtonToTitle = () => {
-    console.log("Attempting to add Save button...");
     const titleContainer = document.querySelector("#title.ytd-watch-metadata h1");
 
     if (titleContainer && !titleContainer.querySelector(".save-btn")) {
-        console.log("Title container found. Adding Save button...");
         const saveBtn = document.createElement("button");
         saveBtn.innerText = "Watch Later";
         saveBtn.classList.add("save-btn");
-        saveBtn.style.cssText =
-            "margin-left: 10px; cursor: pointer; font-weight: bolder; border-radius: 18px; background: rgba(255, 255, 255, 0.1); border: none; padding: 5px 15px; color: white;";
+        saveBtn.style.cssText = `
+            margin-left: 10px; 
+            cursor: pointer; 
+            font-weight: bolder; 
+            border-radius: 18px; 
+            background: rgba(255, 255, 255, 0.1); 
+            border: none; 
+            padding: 5px 15px; 
+            color: white;
+            font-family: 'Roboto', Arial, sans-serif;
+        `;
+        saveBtn.addEventListener('mouseover', () => {
+            saveBtn.style.background = '#3E3E3E';
+        });
+        
+        saveBtn.addEventListener('mouseout', () => {
+            saveBtn.style.background = 'rgba(255, 255, 255, 0.1)';
+        });
 
         titleContainer.appendChild(saveBtn);
 
         saveBtn.addEventListener("click", () => {
-            console.log("Save button clicked.");
             const title = titleContainer.innerText.trim();
             const url = window.location.href;
 
-            // Extract video ID for thumbnail
             const videoID = new URL(url).searchParams.get("v");
             const thumbnail = videoID
                 ? `https://i.ytimg.com/vi/${videoID}/maxresdefault.jpg`
                 : "";
 
-            console.log("Saving video details:", { title, url, thumbnail });
 
             try {
                 chrome.storage.local.get(["savedVideos"], (data) => {
@@ -38,10 +47,10 @@ const addSaveButtonToTitle = () => {
 
                     const isAlreadySaved = savedVideos.some((video) => video.url === url);
                     if (isAlreadySaved) {
-                        alert("This video is already saved.");
+                        alert("This video is already added to the watch list ⚡.");
                         return;
                     }
-                    savedVideos.push({ title, url, thumbnail, tag : "" });
+                    savedVideos.push({ title, url, thumbnail, tag: "", time_added: "" });
                     chrome.storage.local.set({ savedVideos }, () => {
                         if (chrome.runtime.lastError) {
                             console.error("Error saving video:", chrome.runtime.lastError);

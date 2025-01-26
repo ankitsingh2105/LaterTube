@@ -21,7 +21,7 @@ const filterList = document.getElementById('filter_section');
 
 const renderSavedVideos = (savedVideos) => {
     videoList.innerHTML = '';
-    filterList.innerHTML = ''; 
+    filterList.innerHTML = '';
 
     const tagsContainer = document.createElement('div');
     tagsContainer.className = 'tags';
@@ -34,7 +34,7 @@ const renderSavedVideos = (savedVideos) => {
         { name: 'Educational', tag: 'educational_tag' },
         { name: 'Work', tag: 'work_tag' },
         { name: 'Entertainment', tag: 'entertainment_tag' },
-        { name: 'Show All', tag: '' } 
+        { name: 'Show All', tag: '' }
     ];
 
     filters.forEach(filter => {
@@ -51,6 +51,7 @@ const renderSavedVideos = (savedVideos) => {
         const videoLink = document.createElement('a');
         const thumbnail = document.createElement('img');
         const removeButton = document.createElement('button');
+        const date_and_time = document.createElement('small');
 
         const card = document.createElement("main");
         const div1 = document.createElement("div");
@@ -64,6 +65,9 @@ const renderSavedVideos = (savedVideos) => {
         tag1.innerText = "Educational";
         tag2.innerText = "Work";
         tag3.innerText = "Entertainment";
+
+        date_and_time.innerHTML = video.time_added;
+        div1.className = "video_and_time";
 
         videoLink.href = video.url;
         videoLink.target = '_blank';
@@ -104,28 +108,31 @@ const renderSavedVideos = (savedVideos) => {
         tag1.addEventListener("click", (event) => {
             video.tag = "educational_tag";
             tag1.style.background = "yellow";
-            tag2.style.background = "yellowgreen";
-            tag3.style.background = "yellowgreen";
+            tag2.style.background = "greenyellow";
+            tag3.style.background = "greenyellow";
             chrome.storage.local.set({ savedVideos });
         });
 
         tag2.addEventListener("click", (event) => {
             video.tag = "work_tag";
             tag2.style.background = "yellow";
-            tag1.style.background = "yellowgreen";
-            tag3.style.background = "yellowgreen";
+            tag1.style.background = "greenyellow";
+            tag3.style.background = "greenyellow";
             chrome.storage.local.set({ savedVideos });
         });
 
         tag3.addEventListener("click", (event) => {
             video.tag = "entertainment_tag";
             tag3.style.background = "yellow";
-            tag2.style.background = "yellowgreen";
-            tag1.style.background = "yellowgreen";
+            tag2.style.background = "greenyellow";
+            tag1.style.background = "greenyellow";
             chrome.storage.local.set({ savedVideos });
         });
 
         div1.appendChild(thumbnail);
+        div1.appendChild(endLine);
+        div1.appendChild(date_and_time);
+
         div2.appendChild(videoLink);
         div2.appendChild(endLine);
         div2.appendChild(removeButton);
@@ -149,9 +156,9 @@ chrome.storage.local.get(['savedVideos'], (data) => {
     }
 
     const savedVideos = data.savedVideos || [];
-    if(savedVideos.length === 0){
-        videoList.innerHTML = 
-        `<center>
+    if (savedVideos.length === 0) {
+        videoList.innerHTML =
+            `<center>
             <br />
             <div>No videos in the watch list</div>
             <br />

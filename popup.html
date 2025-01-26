@@ -7,7 +7,7 @@
     <title>Saved Videos</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', Arial, sans-serif;
             margin: 0;
             padding: 0;
             width: 350px;
@@ -72,7 +72,7 @@
         }
 
         b,
-        main, .tags {
+        main, .tags, .info_list {
             display: flex;
             align-items: center;
             flex-direction: column;
@@ -101,6 +101,11 @@
             flex-direction: row;
         }
 
+        .info_list{
+            flex-direction:  column;
+            background-color: red;
+        }
+
         b {
             align-items: flex-start;
         }
@@ -114,7 +119,7 @@
             padding: 0px 5px;
         }
         small{
-            background-color: yellowgreen;
+            background-color: greenyellow;
             padding: 2px 4px;
             margin: 0px 2px;
             border-radius: 5px;
@@ -123,6 +128,16 @@
         small:hover{
             cursor : pointer
         }
+        .remove_button_and_time{
+            background-color: red;
+        }
+        .video_and_time{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
 
     </style>
 </head>
