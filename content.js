@@ -5,24 +5,29 @@ const addSaveButtonToTitle = () => {
         const saveBtn = document.createElement("button");
         saveBtn.innerText = "Watch Later";
         saveBtn.classList.add("save-btn");
+        const isDarkMode = document.documentElement.getAttribute("dark") !== null;
+
         saveBtn.style.cssText = `
             margin-left: 10px; 
             cursor: pointer; 
             font-weight: bolder; 
             border-radius: 18px; 
-            background: rgba(255, 255, 255, 0.1); 
             border: none; 
             padding: 5px 15px; 
-            color: white;
             font-family: 'Roboto', Arial, sans-serif;
+            background: ${isDarkMode ? "rgba(255, 255, 255, 0.1)" : "#f2f2f2"};
+            color: ${isDarkMode ? "white" : "black"};
+            transition: background 0.3s ease;
         `;
-        saveBtn.addEventListener('mouseover', () => {
-            saveBtn.style.background = '#3E3E3E';
+
+        saveBtn.addEventListener("mouseover", () => {
+            saveBtn.style.background = isDarkMode ? "#3E3E3E" : "#d9d9d9";
         });
-        
-        saveBtn.addEventListener('mouseout', () => {
-            saveBtn.style.background = 'rgba(255, 255, 255, 0.1)';
+
+        saveBtn.addEventListener("mouseout", () => {
+            saveBtn.style.background = isDarkMode ? "rgba(255, 255, 255, 0.1)" : "#f2f2f2";
         });
+
 
         titleContainer.appendChild(saveBtn);
 
