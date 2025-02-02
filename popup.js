@@ -99,7 +99,7 @@ const renderSavedVideos = (savedVideos) => {
 
 
         // hide the links page
-        cancel_button.addEventListener("click", ()=>{
+        cancel_button.addEventListener("click", () => {
             link_list_section.style.display = "none";
         })
 
@@ -180,21 +180,30 @@ const renderSavedVideos = (savedVideos) => {
     });
 };
 
-// Add event listener for icon clicks
 const iconsContainer = document.querySelector('.icons');
 
 iconsContainer.addEventListener('click', (event) => {
     if (event.target.tagName === 'I' || event.target.tagName === 'IMG') {
         const newLinkItem = document.createElement('li');
-        newLinkItem.contentEditable = true; // Make the new list item editable
+        newLinkItem.contentEditable = true;
         newLinkItem.textContent = 'Add your link here...';
+
+        newLinkItem.style.border = '1px solid #ccc';
+        newLinkItem.style.padding = '4px 6px';
+        newLinkItem.style.minWidth = '150px';
+        newLinkItem.style.outline = 'none';
+        newLinkItem.style.listStyle = 'none';
 
         const iconElement = event.target.cloneNode(true);
 
         const saveButton = document.createElement('button');
         saveButton.textContent = 'Save';
+        saveButton.style.padding = '4px 8px';
+        saveButton.style.cursor = 'pointer';
+
         saveButton.addEventListener('click', () => {
-            newLinkItem.contentEditable = false; 
+            newLinkItem.contentEditable = false;
+
             const linkAnchor = document.createElement('a');
             linkAnchor.href = newLinkItem.textContent;
             linkAnchor.target = '_blank';
@@ -204,16 +213,26 @@ iconsContainer.addEventListener('click', (event) => {
                 const savedVideos = data.savedVideos || [];
                 let target_video = savedVideos.filter((video) => {
                     return video.id == id;
-                })
-                target_video[0].links.push({ url: newLinkItem.textContent, icon: iconElement.outerHTML });
-                renderLinks(target_video[0].links);
-                chrome.storage.local.set({ savedVideos });
-                renderSavedVideos(savedVideos);
+                });
+                if (target_video.length > 0) {
+                    if (!target_video[0].links) {
+                        target_video[0].links = [];
+                    }
+                    target_video[0].links.push({ url: newLinkItem.textContent, icon: iconElement.outerHTML });
+                    renderLinks(target_video[0].links);
+                    chrome.storage.local.set({ savedVideos });
+                    renderSavedVideos(savedVideos);
+                }
             });
         });
 
         const listContainer = document.querySelector('.link_list');
-        const linkItemContainer = document.createElement('div'); 
+        const linkItemContainer = document.createElement('div');
+
+        linkItemContainer.style.display = 'flex';
+        linkItemContainer.style.alignItems = 'center';
+        linkItemContainer.style.gap = '2px';
+        linkItemContainer.style.marginBottom = '5px';
 
         linkItemContainer.appendChild(iconElement);
         linkItemContainer.appendChild(newLinkItem);
@@ -223,20 +242,21 @@ iconsContainer.addEventListener('click', (event) => {
     }
 });
 
+
 // Function to render links with icons
 const renderLinks = (links) => {
     const listContainer = document.querySelector('.link_list');
-    listContainer.innerHTML = ''; 
-    try{
+    listContainer.innerHTML = '';
+    try {
         links.forEach((link, index) => {
             const linkItem = document.createElement('li');
             const linkIconContainer = document.createElement('span');
-            linkIconContainer.innerHTML = link.icon; 
+            linkIconContainer.innerHTML = link.icon;
             const linkAnchor = document.createElement('a');
             linkAnchor.href = link.url;
             linkAnchor.target = '_blank';
             linkAnchor.textContent = 'Link';
-    
+
             const removeButton = document.createElement('button');
             removeButton.textContent = 'Remove';
             removeButton.addEventListener('click', () => {
@@ -252,15 +272,15 @@ const renderLinks = (links) => {
                     renderSavedVideos(savedVideos);
                 });
             });
-    
+
             linkItem.appendChild(linkIconContainer);
             linkItem.appendChild(linkAnchor);
             linkItem.appendChild(removeButton);
-    
+
             listContainer.appendChild(linkItem);
         });
     }
-    catch(error){
+    catch (error) {
     }
 };
 
