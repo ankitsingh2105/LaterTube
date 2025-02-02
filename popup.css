@@ -1,0 +1,194 @@
+::-webkit-scrollbar {
+    width: 2px;
+    height: 0px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #bef800;
+}
+
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    width: 350px;
+}
+
+h1,
+footer {
+    font-size: 18px;
+    padding: 5px;
+    background-color: #f44336;
+    margin: 0;
+    color: white;
+}
+
+h1 {
+    padding: 10px;
+}
+
+footer {
+    font-size: 10px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+a {
+    text-decoration: none;
+    color: #000000;
+}
+
+img {
+    height: 70px;
+    width: 130px;
+    border-radius: 10px;
+    border: 2px solid #bbbbbb;
+    box-shadow: 1px 1px 1px rgb(66, 66, 66);
+}
+
+button {
+    padding: 4px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 10px;
+    margin: 4px 0px;
+    margin-right: 3px;
+
+}
+
+button:hover {
+    background-color: #d32f2f;
+}
+
+b,
+main,
+.tags,
+.info_list {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.tags {
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.tags div {
+    background-color: rgb(255, 69, 69);
+    padding: 3px;
+    box-shadow: 1px 1px 1px rgb(165, 165, 165);
+    margin: 0px 3px;
+    border-radius: 5px;
+    color: white;
+    font-size: 10px;
+}
+
+.tags:hover {
+    cursor: pointer;
+}
+
+main {
+    flex-direction: row;
+}
+
+.info_list {
+    flex-direction: column;
+    background-color: red;
+}
+
+b {
+    align-items: flex-start;
+}
+
+main {
+    width: 100%;
+    justify-content: space-around;
+}
+
+main div {
+    padding: 0px 5px;
+}
+
+small {
+    background-color: greenyellow;
+    padding: 2px 4px;
+    margin: 0px 2px;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+small:hover {
+    cursor: pointer
+}
+
+.remove_button_and_time {
+    background-color: red;
+}
+
+.video_and_time {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.link_section {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: 25%;
+    left: 0%;
+    right: 0%;
+    height: 50%;
+    overflow: scroll;
+    margin: 0px 50px;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+.link_section img{
+    width: 20px;
+    height: 20px;
+    border: none;
+    box-shadow: none;
+}
+.icons{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly
+}
+h4{
+    margin:0px;
+    margin-bottom: 5px;
+}
+.icons i{
+    font-size: 15px ;
+}
+.cancel_button{
+    position: absolute;
+    top: 0%;
+    right:0%;
+    padding: 2px 5px;
+    border-radius: 100px;
+}
+.link_list li{
+    background-color: rgb(227 255 227);
+}

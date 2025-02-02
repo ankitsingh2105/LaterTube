@@ -55,7 +55,7 @@ const addSaveButtonToTitle = () => {
                         alert("This video is already added to the watch list ⚡.");
                         return;
                     }
-                    savedVideos.push({ title, url, thumbnail, tag: "", time_added: "" });
+                    savedVideos.push({id : videoID, title, url, thumbnail, tag: "", links : [] });
                     chrome.storage.local.set({ savedVideos }, () => {
                         if (chrome.runtime.lastError) {
                             console.error("Error saving video:", chrome.runtime.lastError);
