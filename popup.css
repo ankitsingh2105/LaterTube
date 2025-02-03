@@ -154,41 +154,58 @@ small:hover {
     display: none;
     position: absolute;
     background-color: white;
-    top: 25%;
+    top: 20%;
     left: 0%;
     right: 0%;
-    height: 50%;
+    height: 65%;
     overflow: scroll;
     margin: 0px 50px;
     padding: 10px;
     border: 1px solid black;
     border-radius: 10px;
 }
-.link_section img{
+
+.link_section img {
     width: 20px;
     height: 20px;
     border: none;
     box-shadow: none;
 }
-.icons{
+
+.icons {
     display: flex;
     align-items: center;
     justify-content: space-evenly
 }
-h4{
-    margin:0px;
+
+h4 {
+    margin: 0px;
     margin-bottom: 5px;
 }
-.icons i{
-    font-size: 15px ;
+
+.icons i {
+    font-size: 15px;
 }
-.cancel_button{
+
+.cancel_button {
     position: absolute;
     top: 0%;
-    right:0%;
+    right: 0%;
     padding: 2px 5px;
     border-radius: 100px;
 }
-.link_list li{
+
+.link_list li {
     background-color: rgb(227 255 227);
+}
+
+.all_link_icons {
+    background-color: #e7ff97;
+    padding: 10px;
+    border-radius: 10px;
+}
+.icons i, .icons img{
+    background-color: white;
+    padding: 5px;
+    border-radius: 10px;
 }

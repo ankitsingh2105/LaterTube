@@ -246,6 +246,11 @@ iconsContainer.addEventListener('click', (event) => {
 // Function to render links with icons
 const renderLinks = (links) => {
     const listContainer = document.querySelector('.link_list');
+    if(links.length==0){
+        console.log("empty");
+        listContainer.innerHTML = "No links added";
+        return;
+    }
     listContainer.innerHTML = '';
     try {
         links.forEach((link, index) => {
