@@ -2,7 +2,7 @@
     "manifest_version": 3,
     "name": "LaterTube",
     "description": "Easily save YouTube video's link, thumbnail, title to watch later with a simple click!",
-    "version": "1.4",
+    "version": "1.5",
     "permissions": [
         "storage"
     ],
