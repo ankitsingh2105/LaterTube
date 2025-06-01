@@ -3,7 +3,7 @@
 
 A Chrome extension that adds a "Watch Later" button beside each YouTube video. Users can save videos by clicking the button, filtering through tags, adding related links to each video, and viewing the saved videos within the extension.
 
-## Screenhots
+## Screeshots
 ![ExtensionDemoImage2 0 (1)](https://github.com/user-attachments/assets/dafea849-f2d7-4880-bfd0-d9f4d75e8ffd)
 
 ![ExtensionDemoImage2 0](https://github.com/user-attachments/assets/4fd2fff8-ca14-4f9b-a770-f4032eb4aa53)
