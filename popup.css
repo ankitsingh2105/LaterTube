@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
 ::-webkit-scrollbar {
     width: 2px;
     height: 0px;
@@ -8,10 +10,12 @@
 }
 
 body {
-    font-family: 'Roboto', Arial, sans-serif;
+    /* font-family: 'Roboto', Arial, sans-serif; */
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    width: 350px;
+    width: 400px;
+    border-radius: 100px;
 }
 
 h1,
@@ -55,8 +59,9 @@ img {
     width: 130px;
     border-radius: 10px;
     border: 2px solid #bbbbbb;
-    box-shadow: 1px 1px 1px rgb(66, 66, 66);
+    box-shadow: 3px 3px 3px rgb(66, 66, 66);
 }
+
 
 button {
     padding: 4px;
@@ -78,7 +83,8 @@ button:hover {
 b,
 main,
 .tags,
-.info_list {
+.info_list,
+h1 b {
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -92,12 +98,12 @@ main,
 }
 
 .tags div {
-    background-color: rgb(255, 69, 69);
+    background-color: greenyellow;
     padding: 3px;
     box-shadow: 1px 1px 1px rgb(165, 165, 165);
     margin: 0px 3px;
     border-radius: 5px;
-    color: white;
+    color: rgb(0, 0, 0);
     font-size: 10px;
 }
 
@@ -197,6 +203,7 @@ h4 {
 
 .link_list li {
     background-color: rgb(227 255 227);
+    padding: 0px;
 }
 
 .all_link_icons {
@@ -204,8 +211,22 @@ h4 {
     padding: 10px;
     border-radius: 10px;
 }
-.icons i, .icons img{
+
+.icons i,
+.icons img {
     background-color: white;
     padding: 5px;
     border-radius: 10px;
+}
+
+.addLinks {
+    border-radius: 5px;
+}
+
+input {
+    border-radius: 10px;
+}
+
+.filtersOptions {
+    background-color: #bef800;
 }

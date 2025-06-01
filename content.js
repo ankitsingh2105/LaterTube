@@ -42,7 +42,7 @@ const addSaveButtonToTitle = () => {
 
 
             try {
-                chrome.storage.local.get(["savedVideos"], (data) => {
+                chrome?.storage?.local?.get(["savedVideos"], (data) => {
                     if (chrome.runtime.lastError) {
                         console.error("Error accessing storage:", chrome.runtime.lastError);
                         return;
@@ -52,15 +52,15 @@ const addSaveButtonToTitle = () => {
 
                     const isAlreadySaved = savedVideos.some((video) => video.url === url);
                     if (isAlreadySaved) {
-                        alert("This video is already added to the watch list ⚡.");
+                        alert("LaterTube : Video already added to the watch list ⚡");
                         return;
                     }
                     savedVideos.push({id : videoID, title, url, thumbnail, tag: "", links : [] });
-                    chrome.storage.local.set({ savedVideos }, () => {
+                    chrome?.storage?.local?.set({ savedVideos }, () => {
                         if (chrome.runtime.lastError) {
                             console.error("Error saving video:", chrome.runtime.lastError);
                         } else {
-                            alert("Video saved!");
+                            alert("LaterTube : Video added to watch list");
                             console.log("Video saved successfully.");
                         }
                     });
@@ -83,4 +83,3 @@ const observer = new MutationObserver(() => {
 });
 
 observer.observe(document.body, { childList: true, subtree: true });
-

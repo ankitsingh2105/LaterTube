@@ -28,7 +28,7 @@ const renderSavedVideos = (savedVideos) => {
     tagsContainer.className = 'tags';
 
     const filterTitle = document.createElement('b');
-    filterTitle.textContent = 'Filter tags: ';
+    filterTitle.textContent = 'Tags: ';
     tagsContainer.appendChild(filterTitle);
 
     const filters = [
@@ -40,6 +40,7 @@ const renderSavedVideos = (savedVideos) => {
 
     filters.forEach(filter => {
         const filterButton = document.createElement('div');
+        filterButton.className = "filtersOptions"
         filterButton.textContent = filter.name;
         filterButton.addEventListener('click', () => handleFiltering(filter.tag));
         tagsContainer.appendChild(filterButton);
@@ -184,9 +185,9 @@ const iconsContainer = document.querySelector('.icons');
 
 iconsContainer.addEventListener('click', (event) => {
     if (event.target.tagName === 'I' || event.target.tagName === 'IMG') {
-        const newLinkItem = document.createElement('li');
+        const newLinkItem = document.createElement('input');
         newLinkItem.contentEditable = true;
-        newLinkItem.textContent = 'Add your link here...';
+        newLinkItem.placeholder = 'Add your link here...';
 
         newLinkItem.style.border = '1px solid #ccc';
         newLinkItem.style.padding = '4px 6px';
@@ -233,10 +234,14 @@ iconsContainer.addEventListener('click', (event) => {
         linkItemContainer.style.alignItems = 'center';
         linkItemContainer.style.gap = '2px';
         linkItemContainer.style.marginBottom = '5px';
+        iconElement.style.margin = "10px";
+        newLinkItem.style.margin = "10px";
+        saveButton.style.margin = "10px";
 
         linkItemContainer.appendChild(iconElement);
         linkItemContainer.appendChild(newLinkItem);
         linkItemContainer.appendChild(saveButton);
+        linkItemContainer.className = "addLinks"
 
         listContainer.appendChild(linkItemContainer);
     }
@@ -247,7 +252,6 @@ iconsContainer.addEventListener('click', (event) => {
 const renderLinks = (links) => {
     const listContainer = document.querySelector('.link_list');
     if(links.length==0){
-        console.log("empty");
         listContainer.innerHTML = "No links added";
         return;
     }
@@ -292,7 +296,7 @@ const renderLinks = (links) => {
 
 chrome.storage.local.get(['savedVideos'], (data) => {
     data.savedVideos.forEach(element => {
-        console.log(element);
+        // console.log(element);
     });
 });
 
