@@ -10,14 +10,10 @@ A Chrome extension that adds a "Watch Later" button beside each YouTube video. U
 
 ## Features
 - **Save Videos**: Add any YouTube video to your Watch Later list with one click.
-- **Categorization**: Use Educational, Work, and Entertainment tags to organize videos.
+- **Categorisation**: Use Educational, Work, and Entertainment tags to organise videos.
 - **Filter Videos**: Filter videos based on selected categories for easy navigation.
 - **Related links to each video**: Add links like notion notes, and important docs for quick access.
 - **Thumbnail & Title**: Displays video thumbnails and titles for quick access.
 
-## Installation
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/ankitsingh2105/LaterTube.git
 
 
