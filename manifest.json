@@ -1,8 +1,8 @@
 {
     "manifest_version": 3,
-    "name": "Ankit - Save, Tag & Watch YouTube Later",
+    "name": "LaterTube - Save, Tag and Watch YouTube Later",
     "description": "Easily save, tag, oragnize YouTube video's link, thumbnail, title to watch later with a simple click",
-    "version": "1.5.9",
+    "version": "1.5.11",
     "permissions": [
         "storage"
     ],
