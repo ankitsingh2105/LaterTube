@@ -31,7 +31,7 @@ const addSaveButtonToTitle = () => {
 
         titleContainer.appendChild(saveBtn);
 
-        saveBtn.addEventListener("click", () => {
+        saveBtn.addEventListener("click", async () => {
             const title = titleContainer.innerText.trim();
             const url = window.location.href;
 
@@ -42,20 +42,21 @@ const addSaveButtonToTitle = () => {
 
 
             try {
-                chrome?.storage?.local?.get(["savedVideos"], (data) => {
+                await chrome?.storage?.local?.get(["savedVideos"], (data) => {
                     if (chrome.runtime.lastError) {
                         console.error("Error accessing storage:", chrome.runtime.lastError);
                         return;
                     }
 
                     const savedVideos = data.savedVideos || [];
+                    console.log(savedVideos);
 
                     const isAlreadySaved = savedVideos.some((video) => video.url === url);
                     if (isAlreadySaved) {
                         alert("LaterTube : Video already added to the watch list ⚡");
                         return;
                     }
-                    savedVideos.push({id : videoID, title, url, thumbnail, tag: "", links : [] });
+                    savedVideos.push({ id: videoID, title, url, thumbnail, tag: "", links: [] });
                     chrome?.storage?.local?.set({ savedVideos }, () => {
                         if (chrome.runtime.lastError) {
                             console.error("Error saving video:", chrome.runtime.lastError);

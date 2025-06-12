@@ -94,6 +94,8 @@ const renderSavedVideos = (savedVideos) => {
         // on clciking of links button the links should be shown
         link_list_button.addEventListener("click", () => {
             link_list_section.style.display = "block";
+            console.log(video);
+            console.log(video.links);
             renderLinks(video.links);
             id = link_list_button.className;
         });
@@ -181,8 +183,8 @@ const renderSavedVideos = (savedVideos) => {
     });
 };
 
+// todo : saving videos
 const iconsContainer = document.querySelector('.icons');
-
 iconsContainer.addEventListener('click', (event) => {
     if (event.target.tagName === 'I' || event.target.tagName === 'IMG') {
         const newLinkItem = document.createElement('input');
@@ -205,11 +207,6 @@ iconsContainer.addEventListener('click', (event) => {
         saveButton.addEventListener('click', () => {
             newLinkItem.contentEditable = false;
 
-            const linkAnchor = document.createElement('a');
-            linkAnchor.href = newLinkItem.textContent;
-            linkAnchor.target = '_blank';
-            linkAnchor.textContent = 'Link';
-
             chrome.storage.local.get(['savedVideos'], (data) => {
                 const savedVideos = data.savedVideos || [];
                 let target_video = savedVideos.filter((video) => {
@@ -219,7 +216,7 @@ iconsContainer.addEventListener('click', (event) => {
                     if (!target_video[0].links) {
                         target_video[0].links = [];
                     }
-                    target_video[0].links.push({ url: newLinkItem.textContent, icon: iconElement.outerHTML });
+                    target_video[0].links.push({ url: newLinkItem.value, icon: iconElement.outerHTML });
                     renderLinks(target_video[0].links);
                     chrome.storage.local.set({ savedVideos });
                     renderSavedVideos(savedVideos);
@@ -248,7 +245,7 @@ iconsContainer.addEventListener('click', (event) => {
 });
 
 
-// Function to render links with icons
+//* :: function to render links with icons
 const renderLinks = (links) => {
     const listContainer = document.querySelector('.link_list');
     if(links.length==0){
@@ -257,12 +254,14 @@ const renderLinks = (links) => {
     }
     listContainer.innerHTML = '';
     try {
+        console.log("links >> " , links);
         links.forEach((link, index) => {
             const linkItem = document.createElement('li');
             const linkIconContainer = document.createElement('span');
             linkIconContainer.innerHTML = link.icon;
             const linkAnchor = document.createElement('a');
             linkAnchor.href = link.url;
+            console.log(" ->> " , link);
             linkAnchor.target = '_blank';
             linkAnchor.textContent = 'Link';
 
