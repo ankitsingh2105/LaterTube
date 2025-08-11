@@ -1,8 +1,8 @@
 {
     "manifest_version": 3,
-    "name": "opTube - Save, Tag and Watch YouTube Later",
-    "description": "Easily save, tag, oragnize YouTube video's link, thumbnail, title to watch later with a simple click",
-    "version": "1.5.11",
+    "name": "TubeManager - Save, Tag & Timestamp YouTube Videos",
+   "description": "Organize and save YouTube videos with custom tags, colored timestamps, notes, and links for a personalized experience.",
+    "version": "2.0.0",
     "permissions": [
         "storage"
     ],
@@ -23,6 +23,6 @@
         "default_popup": "popup.html"
     },
     "icons": {
-        "128": "laterTubeLogo.png"
+        "128": "TubemanagerLogo.png"
     }
 }

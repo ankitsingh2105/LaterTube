@@ -1,5 +1,5 @@
-# LaterTube 
-![laterTubeLogo-removebg-preview](https://github.com/user-attachments/assets/7e08e1d5-9f17-48bf-b229-c47a38896a83)
+# TubeManager 
+![TubeManagerLogo-removebg-preview](https://github.com/user-attachments/assets/7e08e1d5-9f17-48bf-b229-c47a38896a83)
 
 A Chrome extension that adds a "Watch Later" button beside each YouTube video. Users can save videos by clicking the button, filtering through tags, adding related links to each video, and viewing the saved videos within the extension.
 
