@@ -2,7 +2,7 @@
     "manifest_version": 3,
     "name": "TubeManager - Save, Tag & Timestamp YouTube Videos",
    "description": "Organize and save YouTube videos with custom tags, colored timestamps, notes, and links for a personalized experience.",
-    "version": "2.0.0",
+    "version": "2.1.0",
     "permissions": [
         "storage"
     ],
