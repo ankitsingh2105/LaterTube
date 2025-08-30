@@ -1,78 +1,100 @@
+
+
 const addSaveButtonToTitle = () => {
+    // --------- VIDEO PAGE TITLE ----------
     const titleContainer = document.querySelector("#title.ytd-watch-metadata h1");
 
     if (titleContainer && !titleContainer.querySelector(".save-btn")) {
-        const saveBtn = document.createElement("button");
-        saveBtn.innerText = "Watch Later";
-        saveBtn.classList.add("save-btn");
-        const isDarkMode = document.documentElement.getAttribute("dark") !== null;
-
-        saveBtn.style.cssText = `
-            margin-left: 10px; 
-            cursor: pointer; 
-            font-weight: bolder; 
-            border-radius: 18px; 
-            border: none; 
-            padding: 5px 15px; 
-            font-family: 'Roboto', Arial, sans-serif;
-            background: ${isDarkMode ? "rgba(255, 255, 255, 0.1)" : "#f2f2f2"};
-            color: ${isDarkMode ? "white" : "black"};
-            transition: background 0.3s ease;
-        `;
-
-        saveBtn.addEventListener("mouseover", () => {
-            saveBtn.style.background = isDarkMode ? "#3E3E3E" : "#d9d9d9";
-        });
-
-        saveBtn.addEventListener("mouseout", () => {
-            saveBtn.style.background = isDarkMode ? "rgba(255, 255, 255, 0.1)" : "#f2f2f2";
-        });
-
-
-        titleContainer.appendChild(saveBtn);
-
-        saveBtn.addEventListener("click", async () => {
-            const title = titleContainer.innerText.trim();
-            const url = window.location.href;
-
-            const videoID = new URL(url).searchParams.get("v");
-            const thumbnail = videoID
-                ? `https://i.ytimg.com/vi/${videoID}/maxresdefault.jpg`
-                : "";
-
-
-            try {
-                await chrome?.storage?.local?.get(["savedVideos"], (data) => {
-                    if (chrome.runtime.lastError) {
-                        console.error("Error accessing storage:", chrome.runtime.lastError);
-                        return;
-                    }
-
-                    const savedVideos = data.savedVideos || [];
-                    console.log(savedVideos);
-
-                    const isAlreadySaved = savedVideos.some((video) => video.url === url);
-                    if (isAlreadySaved) {
-                        alert("TubeManager : Video already added to the watch list ⚡");
-                        return;
-                    }
-                    savedVideos.push({ id: videoID, title, url, thumbnail, tag: "", links: [] });
-                    chrome?.storage?.local?.set({ savedVideos }, () => {
-                        if (chrome.runtime.lastError) {
-                            console.error("Error saving video:", chrome.runtime.lastError);
-                        } else {
-                            alert("TubeManager : Video added to watch list");
-                            console.log("Video saved successfully.");
-                        }
-                    });
-                });
-            } catch (error) {
-                console.error("Error in Save button logic:", error);
-            }
-        });
+        createSaveButton(titleContainer);
     }
+
+    // --------- HOMEPAGE / SEARCH TITLES ----------
+    const homePageTitles = document.querySelectorAll("a.yt-lockup-metadata-view-model-wiz__title");
+
+    console.log("ankitsingh :: Found homepage titles =", homePageTitles.length);
+
+    homePageTitles.forEach((homeTitle) => {
+        // Attach button outside the <a> to avoid breaking the link
+        const container = homeTitle.parentElement;
+
+        if (container && !container.querySelector(".save-btn")) {
+            const videoUrl = homeTitle.href;
+            const videoTitle = homeTitle.innerText.trim();
+            createSaveButton(container, videoTitle, () => videoUrl);
+        }
+    });
 };
 
+// --------- REUSABLE BUTTON CREATOR ----------
+function createSaveButton(container, customTitle = null, getUrl = () => window.location.href) {
+    const saveBtn = document.createElement("button");
+    saveBtn.innerText = "Watch Later";
+    saveBtn.classList.add("save-btn");
+    const isDarkMode = document.documentElement.getAttribute("dark") !== null;
+
+    saveBtn.style.cssText = `
+        cursor: pointer; 
+        font-weight: bolder; 
+        border-radius: 18px; 
+        border: none; 
+        padding: 5px 8px; 
+        font-family: 'Roboto', Arial, sans-serif;
+        background: ${isDarkMode ? "rgba(255, 255, 255, 0.1)" : "#f2f2f2"};
+        color: ${isDarkMode ? "white" : "black"};
+        transition: background 0.3s ease;
+    `;
+
+    saveBtn.addEventListener("mouseover", () => {
+        saveBtn.style.background = isDarkMode ? "#3E3E3E" : "#d9d9d9";
+    });
+
+    saveBtn.addEventListener("mouseout", () => {
+        saveBtn.style.background = isDarkMode ? "rgba(255, 255, 255, 0.1)" : "#f2f2f2";
+    });
+
+    container.appendChild(saveBtn);
+
+    saveBtn.addEventListener("click", async () => {
+        const title = (customTitle || container.innerText || "").trim();
+        const url = typeof getUrl === "function" ? getUrl() : window.location.href;
+
+        const videoID = new URL(url).searchParams.get("v");
+        const thumbnail = videoID
+            ? `https://i.ytimg.com/vi/${videoID}/maxresdefault.jpg`
+            : "";
+
+        try {
+            await chrome?.storage?.local?.get(["savedVideos"], (data) => {
+                if (chrome.runtime.lastError) {
+                    console.error("Error accessing storage:", chrome.runtime.lastError);
+                    return;
+                }
+
+                const savedVideos = data.savedVideos || [];
+                const isAlreadySaved = savedVideos.some((video) => video.url === url);
+
+                if (isAlreadySaved) {
+                    alert("TubeManager : Video already added to the watch list ⚡");
+                    return;
+                }
+
+                savedVideos.push({ id: videoID, title, url, thumbnail, tag: "", links: [] });
+                chrome?.storage?.local?.set({ savedVideos }, () => {
+                    if (chrome.runtime.lastError) {
+                        console.error("Error saving video:", chrome.runtime.lastError);
+                    } else {
+                        alert("TubeManager : Video added to watch list");
+                        console.log("Video saved successfully.");
+                    }
+                });
+            });
+        } catch (error) {
+            console.error("Error in Save button logic:", error);
+        }
+    });
+}
+
+// --------- INIT + OBSERVER ----------
 if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", addSaveButtonToTitle);
 } else {
@@ -84,8 +106,6 @@ const observer = new MutationObserver(() => {
 });
 
 observer.observe(document.body, { childList: true, subtree: true });
-
-
 
 //yt timeStamp
 
@@ -243,9 +263,8 @@ function loadSavedMarkers() {
         data.forEach(({ time, color, heading }) => {
             addTimestampMarker(time, color, heading || "No heading");
         });
-    } else {
-        console.log("Video element not ready or duration invalid, retrying...");
-        // Retry after a short delay if video isn’t ready
+    } 
+    else {
         setTimeout(loadSavedMarkers, 500);
     }
 }
